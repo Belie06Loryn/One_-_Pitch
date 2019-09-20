@@ -1,0 +1,111 @@
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_login import UserMixin
+from . import login_manager,db
+
+class User(UserMixin,db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer,primary_key = True)
+    username = db.Column(db.String(255),index = True)
+    email = db.Column(db.String(255),unique = True,index = True)
+    bio = db.Column(db.String(255))
+    pic = db.Column(db.String(255))
+    pass_secure = db.Column(db.String(255))
+    profiles = db.relationship('Profile', backref = 'user', lazy = 'dynamic')
+    pitch = db.relationship('Pitch', backref = 'user', lazy = "dynamic")
+    word = db.relationship('Words', backref = 'user', lazy = "dynamic")
+
+    
+    @property
+    def password(self):
+        raise AttributeError('You cannot read the password attribute')
+
+    @password.setter
+    def password(self, password):
+        self.pass_secure = generate_password_hash(password)
+
+
+    def verify_password(self,password):
+        return check_password_hash(self.pass_secure,password)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))    
+
+    def __repr__(self):
+        return f'User {self.username}'
+
+
+class Category(db.Model):
+    __tablename__ = 'category'
+    id = db.Column(db.Integer,primary_key = True)
+    type_cate = db.Column(db.String(255))
+
+    def ububiko(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_ibyiciro(cls):
+        ibyiciro = Category.query.all()
+        return ibyiciro
+
+
+class Pitch(db.Model):
+    __tablename__ = 'pitches'
+    id = db.Column(db.Integer, primary_key = True)
+    head = db.Column(db.String(255))
+    text = db.Column(db.String)
+    cate = db.Column(db.Integer, db.ForeignKey('ibyiciro.id'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    point = db.relationship('Comment', backref = 'pitches', lazy = "dynamic")
+    votes = db.relationship('Vote', backref = 'pitches', lazy = "dynamic")
+
+    def ububiko_pitch(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def get_pi(id):
+        tone = Pitch.query.filter_by(category=id).all()
+        return tone        
+
+
+class Words(db.Model):
+    __tablename__ = 'comments'
+    id = db.Column(db.Integer, primary_key = True)
+    texto = db.Column(db.String)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    votes = db.relationship('Vote', backref = 'comments', lazy = "dynamic")
+
+    def save_words(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_words(self, id):
+        point = Words.query.order_by(Words.time_posted.desc()).filter_by(pitch=id).all()
+        return point
+
+
+class Tora(db.Model):
+    __tablename__ = 'votes'
+    id = db.Column(db.Integer, primary_key = True)
+    count = db.Column(db.Integer)
+    pitch = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def save_itora(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_itora(cls,users_id,pitches_id):
+        amatora = Vote.query.filter_by(user=users_id, pitch=pitches_id).all()
+        return amatora
+
+
+class Profile(db.Model):
+    __tablename__ = 'profiles'
+    id = db.Column(db.Integer, primary_key = True)
+    pic_path = db.Column(db.String())
+    user = db.Column(db.Integer, db.ForeignKey("users.id"))        
