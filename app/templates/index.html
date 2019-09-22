@@ -1,12 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+
+{%block content%}
+<link href="https://fonts.googleapis.com/css?family=Chilanka&display=swap" rel="stylesheet">
+<div class="container">
+    <img src="https://www.ngnews.ca/static/overrides/ngnews/dist/img/meta-logo.png" style="height: 170px;width:200px;">
+    <marquee behavior="inherit" direction="inherit"><h1 style="text-align:center;font-family: 'Chilanka', cursive;color: rgb(8, 119, 88)">Pitch According To The Category</h1></marquee>
+    <hr>                 
+</div>
+<br>
+<div class="col-md-6">
+<p style="font-size: 20px; float:left;"> <strong> You only have 1 minute to express your self to someone.</strong> </p>
+</div>
+</div>
+</div>
+
+<hr>
+
+<div class="container">
+<br>
+<h2> <strong>Pitch Categories </strong></h2>
+<strong style="font-size: 20px;">{{ macro.displayCategoryList(category) }} </strong>
+<br>
+<br>
+
+
+<h3 class="add-category"><a class="btn btn-primary" href="/add/category" style="background-color:#002457; float:right;"><span aria-hidden="true"> ADD Category </span></a></h3>   
+</div>
+
+
+{% endblock %}>
