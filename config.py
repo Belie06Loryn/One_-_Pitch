@@ -1,7 +1,7 @@
 import os
 
 class Config:
-    SECRET_KEY = os.environ.get('ALEXIE')
+    SECRET_KEY = 'ALEXIE'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://alexie:root@localhost/pitchs'
     UPLOADED_PHOTOS_DESK ='app/static/photos'
     MAIL_SERVER = 'smtp.googlemail.com'

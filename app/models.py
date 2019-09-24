@@ -11,8 +11,8 @@ class User(UserMixin,db.Model):
     pic = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
     profiles = db.relationship('Profile', backref = 'users', lazy = 'dynamic')
-    pitch = db.relationship('Pitch', backref = 'users', lazy = "dynamic")
-    word = db.relationship('Words', backref = 'users', lazy = "dynamic")
+    pich = db.relationship('Pitch', backref = 'users', lazy = "dynamic")
+    ward = db.relationship('Words', backref = 'users', lazy = "dynamic")
 
     
     @property
@@ -57,7 +57,7 @@ class Pitch(db.Model):
     text = db.Column(db.String)
     ibyiciro = db.Column(db.Integer, db.ForeignKey('ibyiciro.id'))
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
-    word = db.relationship('Words', backref = 'pitch', lazy = "dynamic")
+    ward = db.relationship('Words', backref = 'pitch', lazy = "dynamic")
     vote = db.relationship('Tora', backref = 'pitch', lazy = "dynamic")
 
     def ububiko_pitch(self):
@@ -74,7 +74,7 @@ class Words(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     texto = db.Column(db.String)
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    pich = db.Column(db.Integer, db.ForeignKey('pitch.id'))
     vote = db.relationship('Tora', backref = 'word', lazy = "dynamic")
 
     def save_words(self):
@@ -91,8 +91,8 @@ class Tora(db.Model):
     __tablename__ = 'vote'
     id = db.Column(db.Integer, primary_key = True)
     count = db.Column(db.Integer)
-    pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
-    word = db.Column(db.Integer, db.ForeignKey('word.id'))
+    pich = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    ward = db.Column(db.Integer, db.ForeignKey('word.id'))
 
     def save_itora(self):
         db.session.add(self)
