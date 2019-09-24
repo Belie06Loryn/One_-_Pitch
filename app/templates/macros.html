@@ -1,7 +1,7 @@
 {% macro displayCategoryList(category_list) %}
-    {% for ibyiciro in category_list%}
+    {% for category in category_list%}
         <div>
-          <a href="{{url_for('main.ibyiciro',id=ibyiciro.id)}}"><p>{{ibyiciro.name|upper}}</p></a>
+          <a href="{{url_for('main.category',id=ibyiciro.id)}}"><p>{{ibyiciro.name|upper}}</p></a>
         </div>
 
     {% endfor %}
