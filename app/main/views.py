@@ -9,7 +9,6 @@ from .. import db, photos
 def index():
     ibyiciro = Category.get_ibyiciro()
 
-
     return render_template('index.html',  ibyiciro = ibyiciro)
 
 @main.route('/ibyiciro', methods=['GET','POST'])

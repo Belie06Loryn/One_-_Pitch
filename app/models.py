@@ -3,12 +3,12 @@ from flask_login import UserMixin
 from . import login_manager,db
 
 class User(UserMixin,db.Model):
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     bio = db.Column(db.String(255))
-    pic = db.Column(db.String(255))
+    # pic = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
     profiles = db.relationship('Profile', backref = 'user', lazy = 'dynamic')
     pitch = db.relationship('Pitch', backref = 'user', lazy = "dynamic")
@@ -56,7 +56,7 @@ class Pitch(db.Model):
     head = db.Column(db.String(255))
     text = db.Column(db.String)
     ibyiciro = db.Column(db.Integer, db.ForeignKey('ibyiciro.id'))
-    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
     word = db.relationship('Words', backref = 'pitch', lazy = "dynamic")
     vote = db.relationship('Tora', backref = 'pitch', lazy = "dynamic")
 
@@ -73,7 +73,7 @@ class Words(db.Model):
     __tablename__ = 'word'
     id = db.Column(db.Integer, primary_key = True)
     texto = db.Column(db.String)
-    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
     pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
     vote = db.relationship('Tora', backref = 'word', lazy = "dynamic")
 
@@ -108,4 +108,4 @@ class Profile(db.Model):
     __tablename__ = 'profiles'
     id = db.Column(db.Integer, primary_key = True)
     pic_path = db.Column(db.String())
-    user = db.Column(db.Integer, db.ForeignKey("user.id"))        
+    user = db.Column(db.Integer, db.ForeignKey("users.id"))        
