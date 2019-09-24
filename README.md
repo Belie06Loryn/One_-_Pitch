@@ -22,3 +22,24 @@ Pitches is a web application that allows users to use that one minute to express
 - user should be able to comment on the different pitches.
 - user should be able to submit a pitch in any category.
 
+## Known bugs
+No known errors if found drop a message on my profile
+
+## Technologies used
+
+Languages I have used:
+- Python 3.6
+- HTML
+- Bootstrap
+- Flask
+
+Tools that I have used:
+
+- Visual Studio Code as a text editor.
+- GitHub for hosting my project and keep it safe.
+- Heroku for Diploying a project
+
+## Live Demo
+
+The web app can be accessed from the following link []()
+
