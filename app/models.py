@@ -8,11 +8,11 @@ class User(UserMixin,db.Model):
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
     bio = db.Column(db.String(255))
-    # pic = db.Column(db.String(255))
+    pic = db.Column(db.String(255))
     pass_secure = db.Column(db.String(255))
-    profiles = db.relationship('Profile', backref = 'user', lazy = 'dynamic')
-    pitch = db.relationship('Pitch', backref = 'user', lazy = "dynamic")
-    word = db.relationship('Words', backref = 'user', lazy = "dynamic")
+    profiles = db.relationship('Profile', backref = 'users', lazy = 'dynamic')
+    pitch = db.relationship('Pitch', backref = 'users', lazy = "dynamic")
+    word = db.relationship('Words', backref = 'users', lazy = "dynamic")
 
     
     @property
