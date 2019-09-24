@@ -3,12 +3,12 @@
 {% block content %}
 
     <div class="container">
-        <a class="btn btn-primary text-center text-danger" style="float:right;" href="{{url_for('main.nouveau_pitch',id=ibyiciro.id)}}"> Post your Pitch</a>
+        <a class="btn btn-primary text-center text-danger" style="float:left;" href="{{url_for('main.nouveau_pitch',id=ibyiciro.id)}}"> Post your Pitch</a>
     </div>
 
     <div class=" col-md-10 col-md-offset-1 col-sm-12">
 
-        <h3 class="text-center">{{ibyiciro.name|upper}}</h3>
+        <h3 class="text-center">{{category.name|upper}}</h3>
         
         <hr>
  

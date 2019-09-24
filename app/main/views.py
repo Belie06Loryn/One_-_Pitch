@@ -18,9 +18,9 @@ def ibyiciro_bishya():
     form = CategoryForm()
 
     if form.validate_on_submit():
-        name = form.name.data
-        ibyiciro_bishya = Category(name=name)
-        ibyiciro_bishya.save_ikiciro()
+        type_cate = form.type_cate.data
+        ibyiciro_bishya = Category(type_cate=type_cate)
+        ibyiciro_bishya.ububiko()
 
         return redirect(url_for('.index'))
 

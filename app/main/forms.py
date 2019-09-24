@@ -17,5 +17,5 @@ class CommentForm(FlaskForm):
     vote=RadioField('default field arguments', choices=[('1', 'UpVote'), ('1', 'DownVote')])
 
 class CategoryForm(FlaskForm):
-    name = TextAreaField('Category')
+    type_cate = TextAreaField('Category')
     submit = SubmitField()
