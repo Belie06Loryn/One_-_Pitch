@@ -4,29 +4,23 @@
 {%block content%}
 <link href="https://fonts.googleapis.com/css?family=Chilanka&display=swap" rel="stylesheet">
 <div class="container">
-    <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto/gigs/111434432/original/e2374f74fc6212625cc2bd67e891b8e7a235062a/write-a-compelling-elevator-pitch.jpg" style="height: 300px;width:400px;">
-    <marquee behavior="inherit" direction="inherit"><h1 style="text-align:center;font-family: 'Chilanka', cursive;color: rgb(8, 119, 88)">Pitch According To The Category</h1></marquee>
+    <img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto/gigs/111434432/original/e2374f74fc6212625cc2bd67e891b8e7a235062a/write-a-compelling-elevator-pitch.jpg" style="height:200px;width:480px;margin-left: 270px;">
+    <marquee behavior="inherit" direction="inherit"><h1 style="text-align:center;font-family: 'Chilanka', cursive;color: rgb(10, 64, 146)">Pitch According To The Category</h1></marquee>
     <hr>                 
 </div>
 <br>
-<div class="col-md-6">
-<img src="/static/photos/one-minute.jpg" style="height: 170px;width:200px;">
+<div class="container">
+<img src="/static/photos/one-minute.jpg" style="height: 140px;width:150px;">
 <p style="font-size: 20px; float:left;"> <strong> You only have 1 minute to express your self to someone.</strong> </p>
 </div>
-</div>
-</div>
-
 <hr>
-
 <div class="container">
 <br>
 <h2> <strong>Pitch Categories </strong></h2>
+<br>
+<h3 class="add-category"><a class="btn btn-primary" href="/add/ibyiciro" style="background-color:#006aff; float:right;"><span aria-hidden="true"> ADD Category </span></a></h3>
+<br>
 <strong style="font-size: 20px;">{{ macro.displayCategoryList(ibyiciro) }} </strong>
-<br>
-<br>
-
-
-<h3 class="add-category"><a class="btn btn-primary" href="/add/ibyiciro" style="background-color:#002457; float:right;"><span aria-hidden="true"> ADD Category </span></a></h3>   
 </div>
 
 
