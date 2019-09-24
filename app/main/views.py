@@ -11,7 +11,7 @@ def index():
 
     return render_template('index.html',  ibyiciro = ibyiciro)
 
-@main.route('/ibyiciro', methods=['GET','POST'])
+@main.route('/add/ibyiciro', methods=['GET','POST'])
 @login_required
 def ibyiciro_bishya():
     
@@ -29,12 +29,12 @@ def ibyiciro_bishya():
 
 @main.route('/ibyiciro/<int:id>')
 def category(id):
-    ibyiciro = Category.query.get(id)
-    pit = Pitch.query.filter_by(ibyiciro=ibyiciro_.id).all()
+    ibyiciros = Category.query.get(id)
+    pit = Pitch.query.filter_by(ibyiciro=ibyiciros.id).all()
 
-    return render_template('ibyiciro.html', pit=pit, ibyiciro=ibyiciro)
+    return render_template('ibyiciro.html', pit=pit, ibyiciro=ibyiciros)
 
-@main.route('/ibyiciro/pitch/plus/<int:id>', methods=['GET', 'POST'])
+@main.route('/ibyiciro/view_pitch/add/<int:id>', methods=['GET', 'POST'])
 @login_required
 def new_pitch(id):
                                            
@@ -46,8 +46,8 @@ def new_pitch(id):
 
     if form.validate_on_submit():
         content = form.content.data
-        plus_pitch= Pitch(content=content,ibyiciro= ibyiciro.id,user_id=current_user.id)
-        plus_pitch.save_pitch()
+        new_pitch= Pitch(content=content,ibyiciro= ibyiciro.id,user_id=current_user.id)
+        new_pitch.save_pitch()
         return redirect(url_for('.ibyiciro', id=ibyiciro.id))
 
 
@@ -63,7 +63,7 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user)
     
-@main.route('/ibyiciro/pitch/<int:id>', methods=['GET', 'POST'])
+@main.route('/ibyiciro/new_pitch/<int:id>', methods=['GET', 'POST'])
 @login_required
 def view_pitch(id):
 
