@@ -25,36 +25,35 @@ def ibyiciro_bishya():
 
         return redirect(url_for('.index'))
 
-    
     title = 'Category'
     return render_template('ibyiciro_bishya.html', category_form = form,title=title)
 
 @main.route('/ibyiciro/<int:id>')
 def category(id):
-    cate = Category.query.get(id)
-    pit = Pitch.query.filter_by(category=category_.id).all()
+    ibyiciro = Category.query.get(id)
+    pit = Pitch.query.filter_by(ibyiciro=ibyiciro_.id).all()
 
-    return render_template('ibyiciro.html', pit=pit, cate=cate)
+    return render_template('ibyiciro.html', pit=pit, ibyiciro=ibyiciro)
 
 @main.route('/ibyiciro/pitch/plus/<int:id>', methods=['GET', 'POST'])
 @login_required
 def new_pitch(id):
                                            
     form = PitchForm()
-    category = Category.query.filter_by(id=id).first()
+    ibyiciro = Category.query.filter_by(id=id).first()
 
-    if category is None:
+    if ibyiciro is None:
         abort(404)
 
     if form.validate_on_submit():
         content = form.content.data
-        plus_pitch= Pitch(content=content,category= category.id,user_id=current_user.id)
+        plus_pitch= Pitch(content=content,ibyiciro= ibyiciro.id,user_id=current_user.id)
         plus_pitch.save_pitch()
-        return redirect(url_for('.category', id=category.id))
+        return redirect(url_for('.ibyiciro', id=ibyiciro.id))
 
 
     title = 'Pitch'
-    return render_template('nouveau_pitch.html', title = title, pitch_form = form, category = category)
+    return render_template('nouveau_pitch.html', title = title, pitch_form = form,ibyiciro = ibyiciro)
 
 @main.route('/user/<uname>')
 def profile(uname):
@@ -75,8 +74,8 @@ def view_pitch(id):
     if pitches is None:
         abort(404)
 
-    comment = Comments.get_comments(id)
-    return render_template('pitch.html', pitches=pitches, comment=comment, category_id=id)
+    comment = Words.get_comments(id)
+    return render_template('pitch.html', pitches=pitches, comment=comment, ibyiciro_id=id)
 
 
 @main.route('/user/<uname>/update/pic', methods = ['POST'])
@@ -106,7 +105,7 @@ def update_pic(uname):
     if 'photo' in request.files:
         filename = photos.save(request.files['photo'])
         path = f'photos/{filename}'
-        user.profile_pic_path = path
+        user.pic_path = path
         db.session.commit()
     return redirect(url_for('main.profile',uname=uname))
 

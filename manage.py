@@ -8,10 +8,8 @@ app = rema_app('development')
 app = rema_app('test')
 
 manager = Manager(app)
-migrate = Migrate(app, db)
 
 manager.add_command('server',Server)
-manager.add_command('db', MigrateCommand)
 
 @manager.command
 def test():
@@ -22,6 +20,9 @@ def test():
 @manager.shell
 def make_shell_context():
     return dict(app = app,db = db,User = User, Pitch = Pitch, Category = Category, Tora = Tora, Words = Words)
+
+migrate = Migrate(app,db)
+manager.add_command('db',MigrateCommand)
 
 if __name__ == '__main__':
     manager.run()

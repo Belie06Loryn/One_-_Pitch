@@ -28,15 +28,12 @@ def rema_app(config_name):
     db.init_app(app)
     login_manager.init_app(app)
 
-    configure_uploads(app,photos)
-
     mail.init_app(app)
 
     from .main import main as main_blueprint
     app.register_blueprint(main_blueprint)
 
-    from .requests import configure_request
-    configure_request(app)
+    # configure_uploads(app,photos)
 
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint, url_prefix = '/authenticate')

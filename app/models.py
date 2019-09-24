@@ -3,7 +3,7 @@ from flask_login import UserMixin
 from . import login_manager,db
 
 class User(UserMixin,db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = db.Column(db.Integer,primary_key = True)
     username = db.Column(db.String(255),index = True)
     email = db.Column(db.String(255),unique = True,index = True)
@@ -36,7 +36,7 @@ class User(UserMixin,db.Model):
 
 
 class Category(db.Model):
-    __tablename__ = 'category'
+    __tablename__ = 'ibyiciro'
     id = db.Column(db.Integer,primary_key = True)
     type_cate = db.Column(db.String(255))
 
@@ -51,14 +51,14 @@ class Category(db.Model):
 
 
 class Pitch(db.Model):
-    __tablename__ = 'pitches'
+    __tablename__ = 'pitch'
     id = db.Column(db.Integer, primary_key = True)
     head = db.Column(db.String(255))
     text = db.Column(db.String)
-    cate = db.Column(db.Integer, db.ForeignKey('ibyiciro.id'))
-    user = db.Column(db.Integer, db.ForeignKey('users.id'))
-    point = db.relationship('Comment', backref = 'pitches', lazy = "dynamic")
-    votes = db.relationship('Vote', backref = 'pitches', lazy = "dynamic")
+    ibyiciro = db.Column(db.Integer, db.ForeignKey('ibyiciro.id'))
+    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    word = db.relationship('Words', backref = 'pitch', lazy = "dynamic")
+    vote = db.relationship('Tora', backref = 'pitch', lazy = "dynamic")
 
     def ububiko_pitch(self):
         db.session.add(self)
@@ -70,12 +70,12 @@ class Pitch(db.Model):
 
 
 class Words(db.Model):
-    __tablename__ = 'comments'
+    __tablename__ = 'word'
     id = db.Column(db.Integer, primary_key = True)
     texto = db.Column(db.String)
-    user = db.Column(db.Integer, db.ForeignKey('users.id'))
-    pitch = db.Column(db.Integer, db.ForeignKey('pitches.id'))
-    votes = db.relationship('Vote', backref = 'comments', lazy = "dynamic")
+    user = db.Column(db.Integer, db.ForeignKey('user.id'))
+    pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    vote = db.relationship('Tora', backref = 'word', lazy = "dynamic")
 
     def save_words(self):
         db.session.add(self)
@@ -88,19 +88,19 @@ class Words(db.Model):
 
 
 class Tora(db.Model):
-    __tablename__ = 'votes'
+    __tablename__ = 'vote'
     id = db.Column(db.Integer, primary_key = True)
     count = db.Column(db.Integer)
-    pitch = db.Column(db.Integer, db.ForeignKey('pitches.id'))
-    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch = db.Column(db.Integer, db.ForeignKey('pitch.id'))
+    word = db.Column(db.Integer, db.ForeignKey('word.id'))
 
     def save_itora(self):
         db.session.add(self)
         db.session.commit()
 
     @classmethod
-    def get_itora(cls,users_id,pitches_id):
-        amatora = Vote.query.filter_by(user=users_id, pitch=pitches_id).all()
+    def get_itora(cls,user_id,pitch_id):
+        amatora = Vote.query.filter_by(user=user_id, pitch=pitch_id).all()
         return amatora
 
 
@@ -108,4 +108,4 @@ class Profile(db.Model):
     __tablename__ = 'profiles'
     id = db.Column(db.Integer, primary_key = True)
     pic_path = db.Column(db.String())
-    user = db.Column(db.Integer, db.ForeignKey("users.id"))        
+    user = db.Column(db.Integer, db.ForeignKey("user.id"))        
