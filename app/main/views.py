@@ -29,10 +29,10 @@ def ibyiciro_bishya():
 
 @main.route('/ibyiciro/<int:id>')
 def category(id):
-    ibyiciros = Category.query.get(id)
+    ibyiciros = Category.get_ibyiciro(id)
     pit = Pitch.query.filter_by(ibyiciro=ibyiciros.id).all()
 
-    return render_template('ibyiciro.html', pit=pit, ibyiciro=ibyiciros)
+    return render_template('ibyiciro.html', pit=pit, category=ibyiciros)
 
 @main.route('/ibyiciro/view_pitch/add/<int:id>', methods=['GET', 'POST'])
 @login_required
