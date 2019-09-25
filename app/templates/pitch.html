@@ -2,15 +2,14 @@
 {% import 'macros.html' as macro%}
 {% block content %}
   <div class=" col-md-10 col-md-offset-1 col-sm-12">
-      <h3 class="text-center">{{ibyiciro.name|upper}}</h3>
-        <a class="btn btn-primary text-center text-danger " href="/category/view_pitch/{{pitch.ibyiciro.id}}"> Post a Pitch
+      <h3 class="text-center">{{ibyiciro.type_cate|upper}}</h3>
+        <a class="btn btn-primary text-center text-danger " href="/ibyiciro/view_pitch/{{pitches.ibyiciro.id}}"> Post a Pitch
         </a>
         <hr>
   </div>
-
-    {% if pitch %}
+    {% if pitches %}
       <div class="col-sm-12 col-md-8">
-          {{ macro.displayPitches(pitch)}}
+          {{ macro.displayPitches(pitches)}}
       </div>
   {%else%}
         <div class="well">

@@ -34,7 +34,7 @@ def category(id):
 
     return render_template('ibyiciro.html', pit=pit, category=ibyiciros)
 
-@main.route('/ibyiciro/view_pitch/add/<int:id>', methods=['GET', 'POST'])
+@main.route('/ibyiciro/nouveau_pitch/<int:id>', methods=['GET', 'POST'])
 @login_required
 def nouveau_pitch(id):
                                            
@@ -45,10 +45,10 @@ def nouveau_pitch(id):
         abort(404)
 
     if form.validate_on_submit():
-        content = form.content.data
-        nouveau_pitch= Pitch(content=content,ibyiciro= ibyiciro.id,user_id=current_user.id)
+        text = form.text.data
+        nouveau_pitch= Pitch(text=text,ibyiciro= ibyiciro.id)
         nouveau_pitch.ububiko_pitch()
-        return redirect(url_for('.ibyiciro', id=ibyiciro.id))
+        return redirect(url_for('.view_pitch', id=ibyiciro.id))
 
 
     title = 'Pitch'
@@ -67,14 +67,14 @@ def profile(uname):
 @login_required
 def view_pitch(id):
 
-    print(id)
+    
     pitches = Pitch.query.get(id)
-
+    print(pitches.text)
     if pitches is None:
         abort(404)
 
-    comment = Words.get_comments(id)
-    return render_template('pitch.html', pitches=pitches, comment=comment, ibyiciro_id=id)
+    comment = Words.get_words(id)
+    return render_template('pitch.html', pitches=pitches, comment=comment, ibyiciro=id)
 
 
 @main.route('/user/<uname>/update/pic', methods = ['POST'])

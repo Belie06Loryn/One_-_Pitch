@@ -65,7 +65,7 @@ class Pitch(db.Model):
         db.session.commit()
 
     def get_pi(id):
-        tone = Pitch.query.filter_by(category=id).all()
+        tone = Pitch.query.all()
         return tone        
 
 
@@ -82,8 +82,8 @@ class Words(db.Model):
         db.session.commit()
 
     @classmethod
-    def get_words(self, id):
-        point = Words.query.order_by(Words.time_posted.desc()).filter_by(pitch=id).all()
+    def get_words(self,id):
+        point = Words.query.all()
         return point
 
 
