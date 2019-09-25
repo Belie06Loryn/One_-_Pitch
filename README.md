@@ -44,7 +44,7 @@ Tools that I have used:
 The web app can be accessed from the following link []()
 
 ## Support and contact details
-If you meet an issues,you have questions,an ideas or concerns.Just contact me on https://github.com/Belie06Loryn .
+If you meet an issue,you have questions,an ideas or concerns.Just contact me on https://github.com/Belie06Loryn .
 
 ### License
 

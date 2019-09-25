@@ -3,9 +3,9 @@ from flask_script import Manager, Server
 from app.models import User, Pitch, Category, Tora, Words
 from flask_migrate import Migrate, MigrateCommand
 
-app = rema_app('development')
+app = rema_app('production')
 
-# app = rema_app('test')production
+# app = rema_app('test')development
 
 manager = Manager(app)
 migrate = Migrate(app,db)
