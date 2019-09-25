@@ -29,14 +29,14 @@ def ibyiciro_bishya():
 
 @main.route('/ibyiciro/<int:id>')
 def category(id):
-    ibyiciros = Category.get_ibyiciro(id)
+    ibyiciros = Category.query.get(id)
     pit = Pitch.query.filter_by(ibyiciro=ibyiciros.id).all()
 
     return render_template('ibyiciro.html', pit=pit, category=ibyiciros)
 
 @main.route('/ibyiciro/view_pitch/add/<int:id>', methods=['GET', 'POST'])
 @login_required
-def new_pitch(id):
+def nouveau_pitch(id):
                                            
     form = PitchForm()
     ibyiciro = Category.query.filter_by(id=id).first()
@@ -46,8 +46,8 @@ def new_pitch(id):
 
     if form.validate_on_submit():
         content = form.content.data
-        new_pitch= Pitch(content=content,ibyiciro= ibyiciro.id,user_id=current_user.id)
-        new_pitch.save_pitch()
+        nouveau_pitch= Pitch(content=content,ibyiciro= ibyiciro.id,user_id=current_user.id)
+        nouveau_pitch.ububiko_pitch()
         return redirect(url_for('.ibyiciro', id=ibyiciro.id))
 
 
@@ -63,7 +63,7 @@ def profile(uname):
 
     return render_template("profile/profile.html", user = user)
     
-@main.route('/ibyiciro/new_pitch/<int:id>', methods=['GET', 'POST'])
+@main.route('/ibyiciro/view_pitch/<int:id>', methods=['GET', 'POST'])
 @login_required
 def view_pitch(id):
 

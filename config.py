@@ -12,6 +12,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = True
 
 class ProdConfig(Config):
+    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://alexie:root@localhost/pitchs'
     pass
 
 class DevConfig(Config):
