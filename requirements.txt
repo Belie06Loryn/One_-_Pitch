@@ -22,6 +22,7 @@ keyring==10.6.0
 keyrings.alt==3.0
 Mako==1.1.0
 MarkupSafe==1.1.1
+psycopg2==2.7.4
 python-dateutil==2.8.0
 python-editor==1.0.4
 SecretStorage==2.3.1
