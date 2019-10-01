@@ -2,7 +2,6 @@
     {% for category in category_list%}
         <div>
           <a href="{{url_for('main.category',id=category.id)}}"><p>{{category.type_cate|upper}}</p></a>
-          <hr style="margin:800px;">
         </div>
 
     {% endfor %}
