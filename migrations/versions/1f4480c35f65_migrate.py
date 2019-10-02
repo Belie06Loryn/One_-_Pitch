@@ -1,8 +1,8 @@
-"""Initial Migration
+"""Migrate
 
-Revision ID: 5e83f6461466
+Revision ID: 1f4480c35f65
 Revises: 
-Create Date: 2019-09-24 19:27:07.369557
+Create Date: 2019-10-02 09:26:07.628425
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5e83f6461466'
+revision = '1f4480c35f65'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,6 +28,7 @@ def upgrade():
     sa.Column('username', sa.String(length=255), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=True),
     sa.Column('bio', sa.String(length=255), nullable=True),
+    sa.Column('pic', sa.String(length=255), nullable=True),
     sa.Column('pass_secure', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
@@ -54,18 +55,18 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('texto', sa.String(), nullable=True),
     sa.Column('user', sa.Integer(), nullable=True),
-    sa.Column('pitch', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['pitch'], ['pitch.id'], ),
+    sa.Column('pich', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['pich'], ['pitch.id'], ),
     sa.ForeignKeyConstraint(['user'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_table('vote',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('count', sa.Integer(), nullable=True),
-    sa.Column('pitch', sa.Integer(), nullable=True),
-    sa.Column('word', sa.Integer(), nullable=True),
-    sa.ForeignKeyConstraint(['pitch'], ['pitch.id'], ),
-    sa.ForeignKeyConstraint(['word'], ['word.id'], ),
+    sa.Column('pich', sa.Integer(), nullable=True),
+    sa.Column('ward', sa.Integer(), nullable=True),
+    sa.ForeignKeyConstraint(['pich'], ['pitch.id'], ),
+    sa.ForeignKeyConstraint(['ward'], ['word.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###

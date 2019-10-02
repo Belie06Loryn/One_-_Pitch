@@ -5,7 +5,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 app = rema_app('production')
 
-# app = rema_app('test')development
+# app = rema_app('test')development 
 
 manager = Manager(app)
 migrate = Migrate(app,db)
